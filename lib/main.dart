@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_restau/screens/login_screen.dart';
 
 void main() {
   runApp(const App());
@@ -10,12 +11,16 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'My Restaurant',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFFFABAB),
+        ),
         useMaterial3: true,
+        checkboxTheme: const CheckboxThemeData(),
       ),
-      home: const Placeholder(),
+      home: const LogInScreen(),
     );
   }
 }
