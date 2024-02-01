@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_restau/screens/login_screen.dart';
+import 'package:my_restau/widgets/custom_text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -10,6 +11,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   bool isVisibilityPassword = false;
   bool isVisibilityConfirmPassword = false;
 
@@ -74,34 +78,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: 18,
             ),
-            TextFormField(
-              style: GoogleFonts.poppins(fontSize: 15),
+            CustomTextField(
+              textEditingController: passwordController,
               keyboardType: TextInputType.visiblePassword,
-              obscureText: isVisibilityPassword,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                hintStyle: GoogleFonts.poppins(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                ),
-                focusColor: Colors.blue,
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                  gapPadding: 1,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                suffixIcon: IconButton(
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onPressed: () {
-                    setState(() {
-                      isVisibilityPassword = !isVisibilityPassword;
-                    });
-                  },
-                  icon: isVisibilityPassword
-                      ? const Icon(Icons.visibility_outlined)
-                      : const Icon(Icons.visibility_off_outlined),
-                ),
+              hintText: 'Password',
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    isVisibilityPassword = !isVisibilityPassword;
+                  });
+                },
+                icon: isVisibilityPassword
+                    ? const Icon(Icons.visibility_off_outlined)
+                    : const Icon(Icons.visibility_outlined),
               ),
             ),
             const SizedBox(
@@ -146,7 +135,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, 'registerSuccess');
+                },
                 child: const TextWidget(
                   text: 'Sign Up',
                   fontSize: 15,

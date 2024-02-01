@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restau/screens/register_screen.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -12,13 +11,23 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   bool isChecked = false;
   bool isVisibility = false;
+  bool isLoading = false;
 
   void signUpPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) => const RegisterScreen(),
-      ),
-    );
+    Navigator.pushNamed(context, 'registerScreen');
+  }
+
+  void signIn() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    await Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        isLoading = false;
+      });
+      Navigator.pushNamed(context, 'homeScreen');
+    });
   }
 
   @override
@@ -103,15 +112,31 @@ class _LogInScreenState extends State<LogInScreen> {
                 color: const Color(0xFFD14D72),
                 borderRadius: BorderRadius.circular(10),
               ),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: InkWell(
-                onTap: () {},
-                child: const TextWidget(
-                  text: 'Login',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  textAlign: TextAlign.center,
-                  textColor: Colors.white,
+              child: SizedBox(
+                height: 40,
+                child: Center(
+                  child: InkWell(
+                    onTap: signIn,
+                    child: isLoading
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 3,
+                                strokeAlign: 0.1,
+                              ),
+                            ),
+                          )
+                        : const TextWidget(
+                            text: 'Login',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            textAlign: TextAlign.center,
+                            textColor: Colors.white,
+                          ),
+                  ),
                 ),
               ),
             ),
