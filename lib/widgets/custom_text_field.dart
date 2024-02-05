@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({
+  const CustomTextField({
     this.suffixIcon,
+    this.prefixIcon,
     this.obscureText = false,
     required this.textEditingController,
     required this.keyboardType,
@@ -16,8 +17,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final Widget? suffixIcon;
-
-  final String name = '';
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +32,7 @@ class CustomTextField extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
         suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
         contentPadding: const EdgeInsets.all(10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

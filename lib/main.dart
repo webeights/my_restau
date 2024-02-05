@@ -21,8 +21,16 @@ class App extends StatelessWidget {
           seedColor: const Color(0xFFFFABAB),
         ),
         useMaterial3: true,
+        highlightColor: Colors.transparent,
+        splashFactory: NoSplash.splashFactory,
+        splashColor: Colors.transparent,
+        iconButtonTheme: IconButtonThemeData(
+          style: const ButtonStyle().copyWith(
+            splashFactory: NoSplash.splashFactory,
+          ),
+        ),
       ),
-      initialRoute: 'loginScreen',
+      initialRoute: 'homeScreen',
       routes: {
         'loginScreen': (context) => const LogInScreen(),
         'registerScreen': (context) => const RegisterScreen(),

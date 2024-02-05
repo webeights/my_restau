@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_restau/widgets/custom_text_field.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -9,8 +10,11 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   bool isChecked = false;
-  bool isVisibility = false;
+  bool isVisibility = true;
   bool isLoading = false;
 
   void signUpPage() {
@@ -52,42 +56,30 @@ class _LogInScreenState extends State<LogInScreen> {
             const SizedBox(
               height: 15,
             ),
-            TextFormField(
+            CustomTextField(
+              textEditingController: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: 'Email',
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                  gapPadding: 1,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+              hintText: 'Email',
             ),
             const SizedBox(
               height: 20,
             ),
-            TextFormField(
+            CustomTextField(
+              textEditingController: passwordController,
               keyboardType: TextInputType.visiblePassword,
+              hintText: 'Password',
               obscureText: isVisibility,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                  gapPadding: 1,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                suffixIcon: IconButton(
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onPressed: () {
-                    setState(() {
-                      isVisibility = !isVisibility;
-                    });
-                  },
-                  icon: isVisibility
-                      ? const Icon(Icons.visibility_outlined)
-                      : const Icon(Icons.visibility_off_outlined),
-                ),
+              suffixIcon: IconButton(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onPressed: () {
+                  setState(() {
+                    isVisibility = !isVisibility;
+                  });
+                },
+                icon: isVisibility
+                    ? const Icon(Icons.visibility_off_outlined)
+                    : const Icon(Icons.visibility_outlined),
               ),
             ),
             Row(

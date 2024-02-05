@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:my_restau/widgets/custom_text_field.dart';
 
@@ -11,18 +10,17 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
-  bool isVisibilityPassword = false;
-  bool isVisibilityConfirmPassword = false;
+  bool isVisibilityPassword = true;
+  bool isVisibilityConfirmPassword = true;
 
   void signInPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) => const LogInScreen(),
-      ),
-    );
+    Navigator.of(context).pushNamed('loginScreen');
   }
 
   @override
@@ -34,7 +32,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 170,
+              height: 30,
+            ),
+            Image.asset(
+              'asset/images/register.png',
+              width: 180,
             ),
             const TextWidget(
               text: 'Sign Up',
@@ -44,41 +46,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: 20,
             ),
-            TextFormField(
-              style: GoogleFonts.poppins(fontSize: 15),
-              decoration: InputDecoration(
-                hintText: 'Name',
-                hintStyle: GoogleFonts.poppins(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                ),
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 18,
-            ),
-            TextFormField(
-              style: GoogleFonts.poppins(fontSize: 15),
-              decoration: InputDecoration(
-                hintText: 'Email',
-                hintStyle: GoogleFonts.poppins(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                ),
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+            CustomTextField(
+              textEditingController: nameController,
+              keyboardType: TextInputType.name,
+              hintText: 'Name',
             ),
             const SizedBox(
               height: 18,
             ),
             CustomTextField(
+              textEditingController: emailController,
+              keyboardType: TextInputType.emailAddress,
+              hintText: 'Email',
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            CustomTextField(
+              obscureText: isVisibilityPassword,
               textEditingController: passwordController,
               keyboardType: TextInputType.visiblePassword,
               hintText: 'Password',
@@ -96,32 +81,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: 18,
             ),
-            TextFormField(
-              style: GoogleFonts.poppins(fontSize: 14),
-              keyboardType: TextInputType.visiblePassword,
+            CustomTextField(
               obscureText: isVisibilityConfirmPassword,
-              decoration: InputDecoration(
-                hintText: 'Confirm password',
-                hintStyle: GoogleFonts.poppins(
-                    fontSize: 15, fontWeight: FontWeight.w500),
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                  gapPadding: 1,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                suffixIcon: IconButton(
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onPressed: () {
-                    setState(() {
-                      isVisibilityConfirmPassword =
-                          !isVisibilityConfirmPassword;
-                    });
-                  },
-                  icon: isVisibilityConfirmPassword
-                      ? const Icon(Icons.visibility_outlined)
-                      : const Icon(Icons.visibility_off_outlined),
-                ),
+              textEditingController: confirmPasswordController,
+              keyboardType: TextInputType.visiblePassword,
+              hintText: 'Confirm password',
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    isVisibilityConfirmPassword = !isVisibilityPassword;
+                  });
+                },
+                icon: isVisibilityConfirmPassword
+                    ? const Icon(Icons.visibility_off_outlined)
+                    : const Icon(Icons.visibility_outlined),
               ),
             ),
             const SizedBox(
@@ -193,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
             const SizedBox(
-              height: 80,
+              height: 50,
             ),
             const TextWidget(text: 'Already have an account?'),
             InkWell(
