@@ -27,6 +27,9 @@ class App extends StatelessWidget {
         iconButtonTheme: IconButtonThemeData(
           style: const ButtonStyle().copyWith(
             splashFactory: NoSplash.splashFactory,
+            iconColor: const MaterialStatePropertyAll(
+              Color(0xFFD14D72),
+            ),
           ),
         ),
       ),

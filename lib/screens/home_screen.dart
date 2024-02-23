@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_restau/data/dummy_data.dart';
+import 'package:my_restau/screens/details_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:my_restau/widgets/custom_text_field.dart';
 
@@ -13,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchMenu = TextEditingController();
 
+  int currentIndex = 0;
+  List<bool> isAddToCart = List.filled(menuItemList.length, true);
   List<String> listOfCategory = [
     'All',
     'Steak',
@@ -32,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: Image.asset(
             'asset/icon/menu-burger.png',
             width: 20,
+            color: const Color(0xFFD14D72),
           ),
         ),
         actions: <Widget>[
@@ -40,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Image.asset(
               'asset/icon/bell.png',
               width: 20,
+              color: const Color(0xFFD14D72),
             ),
           ),
           IconButton(
@@ -47,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Image.asset(
               'asset/icon/settings.png',
               width: 20,
+              color: const Color(0xFFD14D72),
             ),
           ),
         ],
@@ -72,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 splashFactory: NoSplash.splashFactory,
                 tabAlignment: TabAlignment.start,
                 labelPadding: const EdgeInsetsDirectional.only(end: 30),
-                physics: const AlwaysScrollableScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 indicatorSize: TabBarIndicatorSize.label,
                 indicatorColor: const Color(0xFFD14D72),
                 tabs: listOfCategory.map((category) {
@@ -88,12 +94,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Expanded(
                 child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     GridView.builder(
-                      itemCount: listMenu.length,
+                      itemCount: menuItemList.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 0.8,
+                        childAspectRatio: 0.7,
                         crossAxisCount: 2,
                         mainAxisSpacing: 2,
                         crossAxisSpacing: 5,
@@ -101,41 +108,110 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       itemBuilder: (context, index) {
                         return Card(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                color: Colors.amber,
-                                child: Image.asset(
-                                  listMenu[index].images,
-                                  width: 120,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsScreen(
+                                    item: menuItemList[index],
+                                  ),
                                 ),
+                              );
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 10,
+                                      bottom: 10,
+                                    ),
+                                    child: Center(
+                                      child: Image.asset(
+                                        menuItemList[index].images,
+                                        height: 95,
+                                        width: 95,
+                                      ),
+                                    ),
+                                  ),
+                                  TextWidget(
+                                    text: menuItemList[index].title,
+                                    fontSize: 13,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.star,
+                                        color: Color(0xFFD14D72),
+                                        size: 17,
+                                      ),
+                                      TextWidget(
+                                        text: menuItemList[index]
+                                            .ratings
+                                            .toString(),
+                                        fontSize: 13,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextWidget(
+                                          text:
+                                              '\$${menuItemList[index].amount.toStringAsFixed(2)}',
+                                          fontSize: 13,
+                                        ),
+                                        IconButton(
+                                          highlightColor: Colors.transparent,
+                                          splashColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          iconSize: 20,
+                                          onPressed: () {
+                                            setState(() {
+                                              isAddToCart[index] =
+                                                  !isAddToCart[index];
+                                            });
+                                          },
+                                          icon: isAddToCart[index]
+                                              ? const Icon(
+                                                  Icons
+                                                      .favorite_outline_outlined,
+                                                )
+                                              : const Icon(
+                                                  Icons.favorite,
+                                                ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              TextWidget(
-                                text: listMenu[index].title,
-                                fontSize: 13,
-                              ),
-                            ],
+                            ),
                           ),
                         );
                       },
                     ),
-                    Center(
+                    const Center(
                       child: Text('hello'),
                     ),
-                    Center(
+                    const Center(
                       child: Text('hello'),
                     ),
-                    Center(
+                    const Center(
                       child: Text('hello'),
                     ),
-                    Center(
+                    const Center(
                       child: Text('hello'),
                     ),
-                    Center(
+                    const Center(
                       child: Text('hello'),
                     ),
                   ],
@@ -144,6 +220,37 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: const Color(0xFFD14D72),
+        backgroundColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(82, 209, 77, 114),
+        iconSize: 23,
+        currentIndex: currentIndex,
+        onTap: (value) {
+          setState(() {
+            currentIndex = value;
+          });
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.access_alarm),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.accessibility_new_outlined),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_box_outlined),
+            label: '',
+          ),
+        ],
       ),
     );
   }
