@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_restau/data/dummy_data.dart';
+import 'package:my_restau/models/menu_item.dart';
 import 'package:my_restau/screens/details_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:my_restau/widgets/custom_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({required this.listItem, super.key});
+
+  final List<MenuItem> listItem;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -13,9 +16,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchMenu = TextEditingController();
-
-  int currentIndex = 0;
   List<bool> isAddToCart = List.filled(menuItemList.length, true);
+
+  void saveMenuItem(MenuItem items) {
+    setState(() {
+      widget.listItem.add(items);
+    });
+  }
+
   List<String> listOfCategory = [
     'All',
     'Steak',
@@ -62,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: DefaultTabController(
           length: 6,
           child: Column(
-            children: [
+            children: <Widget>[
               CustomTextField(
                 textEditingController: searchMenu,
                 keyboardType: TextInputType.name,
@@ -76,6 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 dividerHeight: 0,
                 isScrollable: true,
                 splashFactory: NoSplash.splashFactory,
+                overlayColor:
+                    MaterialStateProperty.all<Color>(Colors.transparent),
                 tabAlignment: TabAlignment.start,
                 labelPadding: const EdgeInsetsDirectional.only(end: 30),
                 physics: const BouncingScrollPhysics(),
@@ -95,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: TabBarView(
                   physics: const NeverScrollableScrollPhysics(),
-                  children: [
+                  children: <Widget>[
                     GridView.builder(
                       itemCount: menuItemList.length,
                       gridDelegate:
@@ -142,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 13,
                                   ),
                                   Row(
-                                    children: [
+                                    children: <Widget>[
                                       const Icon(
                                         Icons.star,
                                         color: Color(0xFFD14D72),
@@ -179,6 +189,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                               isAddToCart[index] =
                                                   !isAddToCart[index];
                                             });
+
+                                            saveMenuItem(
+                                              MenuItem(
+                                                title:
+                                                    menuItemList[index].title,
+                                                images:
+                                                    menuItemList[index].images,
+                                                amount:
+                                                    menuItemList[index].amount,
+                                                ratings:
+                                                    menuItemList[index].ratings,
+                                                cookingTime: menuItemList[index]
+                                                    .cookingTime,
+                                                description: menuItemList[index]
+                                                    .description,
+                                              ),
+                                            );
                                           },
                                           icon: isAddToCart[index]
                                               ? const Icon(
@@ -220,37 +247,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFFD14D72),
-        backgroundColor: Colors.white,
-        unselectedItemColor: const Color.fromARGB(82, 209, 77, 114),
-        iconSize: 23,
-        currentIndex: currentIndex,
-        onTap: (value) {
-          setState(() {
-            currentIndex = value;
-          });
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_alarm),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.accessibility_new_outlined),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_box_outlined),
-            label: '',
-          ),
-        ],
       ),
     );
   }

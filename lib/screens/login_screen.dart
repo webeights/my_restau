@@ -26,7 +26,7 @@ class _LogInScreenState extends State<LogInScreen> {
       isLoading = true;
     });
 
-    await Future.delayed(const Duration(seconds: 3), () {
+    await Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
         isLoading = false;
       });
@@ -37,134 +37,118 @@ class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 18,
-          vertical: 100,
-        ),
-        child: Column(
-          children: <Widget>[
-            Image.asset(
-              'asset/images/sammy.png',
-              width: 200,
-            ),
-            const TextWidget(
-              text: 'Login',
-              fontSize: 25,
-              fontWeight: FontWeight.w700,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            CustomTextField(
-              textEditingController: emailController,
-              keyboardType: TextInputType.emailAddress,
-              hintText: 'Email',
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomTextField(
-              textEditingController: passwordController,
-              keyboardType: TextInputType.visiblePassword,
-              hintText: 'Password',
-              obscureText: isVisibility,
-              suffixIcon: IconButton(
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                onPressed: () {
-                  setState(() {
-                    isVisibility = !isVisibility;
-                  });
-                },
-                icon: isVisibility
-                    ? const Icon(Icons.visibility_off_outlined)
-                    : const Icon(Icons.visibility_outlined),
+      resizeToAvoidBottomInset: false,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset(
+                'asset/images/sammy.png',
+                width: 200,
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Checkbox(
-                  splashRadius: 0,
-                  activeColor: const Color(0xFFD14D72),
-                  value: isChecked,
-                  onChanged: (value) {
+              const SizedBox(
+                height: 15,
+              ),
+              CustomTextField(
+                textEditingController: emailController,
+                keyboardType: TextInputType.emailAddress,
+                hintText: 'Email',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomTextField(
+                textEditingController: passwordController,
+                keyboardType: TextInputType.visiblePassword,
+                hintText: 'Password',
+                obscureText: isVisibility,
+                suffixIcon: IconButton(
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  onPressed: () {
                     setState(() {
-                      isChecked = value!;
+                      isVisibility = !isVisibility;
                     });
                   },
+                  icon: isVisibility
+                      ? const Icon(Icons.visibility_off_outlined)
+                      : const Icon(Icons.visibility_outlined),
                 ),
-                const Text('remember me')
-              ],
-            ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: const Color(0xFFD14D72),
-                borderRadius: BorderRadius.circular(10),
               ),
-              child: SizedBox(
-                height: 40,
-                child: Center(
-                  child: InkWell(
-                    onTap: signIn,
-                    child: isLoading
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 3,
-                                strokeAlign: 0.1,
-                              ),
-                            ),
-                          )
-                        : const TextWidget(
-                            text: 'Login',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            textAlign: TextAlign.center,
-                            textColor: Colors.white,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Checkbox(
+                    splashRadius: 0,
+                    activeColor: const Color(0xFFD14D72),
+                    value: isChecked,
+                    onChanged: (value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+                  ),
+                  const Text('remember me')
+                ],
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFD14D72),
+                  minimumSize: const Size(double.infinity, 44),
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: signIn,
+                child: isLoading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 3,
+                            strokeAlign: 0.1,
                           ),
+                        ),
+                      )
+                    : const Text('Login'),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 80,
+                width: double.infinity,
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () {},
+                  child: const TextWidget(
+                    text: 'forgot password?',
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 80,
-              width: double.infinity,
-              child: InkWell(
-                splashColor: Colors.transparent,
+              const TextWidget(
+                text: 'Don\'t have an account?',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+              InkWell(
                 highlightColor: Colors.transparent,
-                onTap: () {},
+                splashColor: Colors.transparent,
+                onTap: signUpPage,
                 child: const TextWidget(
-                  text: 'forgot password?',
-                  textAlign: TextAlign.right,
+                  text: 'Sign Up',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                  textColor: Color(0xFFFFABAB),
                 ),
               ),
-            ),
-            const TextWidget(
-              text: 'Don\'t have an account?',
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-            InkWell(
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              onTap: signUpPage,
-              child: const TextWidget(
-                text: 'Sign Up',
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-                textColor: Color(0xFFFFABAB),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

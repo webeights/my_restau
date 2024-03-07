@@ -1,5 +1,7 @@
 import 'package:my_restau/models/menu_item.dart';
 
+List<MenuItem> menu = [];
+
 const List<MenuItem> menuItemList = [
   MenuItem(
     title: 'Barbeque Chicken',

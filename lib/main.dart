@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:my_restau/screens/home_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:my_restau/screens/my_restaurant_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:my_restau/screens/register_screen.dart';
 import 'package:my_restau/screens/register_success.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: <SystemUiOverlay>[],
+  );
+
   runApp(const App());
 }
 
@@ -26,6 +33,7 @@ class App extends StatelessWidget {
         splashColor: Colors.transparent,
         iconButtonTheme: IconButtonThemeData(
           style: const ButtonStyle().copyWith(
+            iconSize: const MaterialStatePropertyAll(19),
             splashFactory: NoSplash.splashFactory,
             iconColor: const MaterialStatePropertyAll(
               Color(0xFFD14D72),
@@ -33,12 +41,12 @@ class App extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: 'homeScreen',
+      initialRoute: 'loginScreen',
       routes: {
         'loginScreen': (context) => const LogInScreen(),
         'registerScreen': (context) => const RegisterScreen(),
         'registerSuccess': (context) => const RegisterSuccess(),
-        'homeScreen': (context) => const HomeScreen(),
+        'homeScreen': (context) => const MyRestaurant(),
       },
     );
   }
