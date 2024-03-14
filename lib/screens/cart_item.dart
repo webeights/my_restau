@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:my_restau/models/menu_item.dart';
 import 'package:my_restau/screens/login_screen.dart';
 
@@ -38,13 +37,15 @@ class _CartItemState extends State<CartItem> {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10),
         child: Row(
           children: <Widget>[
-            Image.asset(
-              widget.cartItem.images,
-              height: 60,
-              width: 60,
+            CircleAvatar(
+              child: Image.asset(
+                widget.cartItem.images,
+                height: 60,
+                width: 60,
+              ),
             ),
             const SizedBox(
               width: 10,

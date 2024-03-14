@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         splashColor: Colors.transparent,
         iconButtonTheme: IconButtonThemeData(
           style: const ButtonStyle().copyWith(
-            iconSize: const MaterialStatePropertyAll(19),
+            iconSize: const MaterialStatePropertyAll(23),
             splashFactory: NoSplash.splashFactory,
             iconColor: const MaterialStatePropertyAll(
               Color(0xFFD14D72),

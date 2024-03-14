@@ -4,6 +4,7 @@ import 'package:my_restau/screens/nav_screen/cart.dart';
 import 'package:my_restau/screens/nav_screen/favorite_screen.dart';
 import 'package:my_restau/screens/nav_screen/home_screen.dart';
 import 'package:my_restau/screens/nav_screen/profile_screen.dart';
+import 'package:my_restau/screens/nav_screen/search_screen.dart';
 
 class MyRestaurant extends StatefulWidget {
   const MyRestaurant({super.key});
@@ -16,7 +17,8 @@ class _MyRestaurantState extends State<MyRestaurant> {
   int currentIndex = 0;
 
   List<Widget> page = [
-    HomeScreen(
+    const HomeScreen(),
+    SearchScreen(
       listItem: menu,
     ),
     Cart(
@@ -46,6 +48,10 @@ class _MyRestaurantState extends State<MyRestaurant> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_outlined),

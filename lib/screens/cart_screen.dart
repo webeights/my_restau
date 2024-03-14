@@ -15,6 +15,12 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  void removeItem(MenuItem item) {
+    setState(() {
+      widget.listOfItem.remove(item);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget cartIsEmpty = Center(
@@ -66,8 +72,14 @@ class _CartScreenState extends State<CartScreen> {
             itemCount: widget.listOfItem.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-              return CartItem(
-                cartItem: widget.listOfItem[index],
+              return Dismissible(
+                key: ValueKey(widget.listOfItem[index]),
+                onDismissed: (dismiss) {
+                  removeItem(widget.listOfItem[index]);
+                },
+                child: CartItem(
+                  cartItem: widget.listOfItem[index],
+                ),
               );
             },
           ),
