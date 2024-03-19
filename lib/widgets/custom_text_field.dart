@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.color,
+    this.contentPadding,
     this.obscureText = false,
     required this.textEditingController,
     required this.keyboardType,
@@ -22,6 +23,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final InputBorder? inputBorder;
   final Color? color;
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +42,63 @@ class CustomTextField extends StatelessWidget {
           ),
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
-          contentPadding: const EdgeInsets.all(9),
+          contentPadding: contentPadding,
           border: inputBorder,
         ),
       ),
     );
   }
 }
+
+
+
+// TextWidget(
+//                     text: widget.item.title,
+//                     fontSize: 20,
+//                     fontWeight: FontWeight.w500,
+//                   ),
+//                   RatingBar.builder(
+//                     initialRating: widget.item.ratings,
+//                     itemCount: 5,
+//                     minRating: 1,
+//                     allowHalfRating: true,
+//                     itemSize: 18,
+//                     glow: false,
+//                     tapOnlyMode: true,
+//                     direction: Axis.horizontal,
+//                     itemBuilder: (context, index) {
+//                       return const Icon(
+//                         Icons.star,
+//                         color: Color(0xFFD14D72),
+//                       );
+//                     },
+//                     onRatingUpdate: (ratings) => print(ratings),
+//                   ),
+//                   const SizedBox(
+//                     height: 10,
+//                   ),
+//                   const SizedBox(
+//                     height: 10,
+//                   ),
+//                   TextWidget(
+//                     text: widget.item.description,
+//                     fontSize: 13,
+//                   ),
+//                   const SizedBox(
+//                     height: 100,
+//                   ),
+//                   Expanded(
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: <Widget>[
+//                         CustomButtonWidget(
+//                           text: 'Order Now',
+//                           onTap: () {},
+//                         ),
+//                         CustomButtonWidget(
+//                           text: 'Add to Cart',
+//                           onTap: addItemIntoCart,
+//                         ),
+//                       ],
+//                     ),
+//                   )

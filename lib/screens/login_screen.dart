@@ -56,6 +56,9 @@ class _LogInScreenState extends State<LogInScreen> {
                 textEditingController: emailController,
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'Email',
+                contentPadding: const EdgeInsets.all(12),
+                inputBorder: InputBorder.none,
+                color: Colors.grey.shade200,
               ),
               const SizedBox(
                 height: 20,
@@ -64,6 +67,9 @@ class _LogInScreenState extends State<LogInScreen> {
                 textEditingController: passwordController,
                 keyboardType: TextInputType.visiblePassword,
                 hintText: 'Password',
+                contentPadding: const EdgeInsets.all(12),
+                inputBorder: InputBorder.none,
+                color: Colors.grey.shade200,
                 obscureText: isVisibility,
                 suffixIcon: IconButton(
                   highlightColor: Colors.transparent,

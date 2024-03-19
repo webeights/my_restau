@@ -12,6 +12,6 @@ class MenuItem {
   final String images;
   final double amount;
   final double ratings;
-  final int cookingTime;
+  final String cookingTime;
   final String description;
 }
