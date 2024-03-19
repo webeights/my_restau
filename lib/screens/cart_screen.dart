@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_restau/models/menu_item.dart';
 import 'package:my_restau/screens/cart_item.dart';
-import 'package:my_restau/screens/my_restaurant_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:my_restau/screens/nav_screen/search_screen.dart';
 import 'package:my_restau/widgets/custom_button_widget.dart';
