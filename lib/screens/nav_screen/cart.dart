@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_restau/data/dummy_data.dart';
 import 'package:my_restau/models/menu_item.dart';
 import 'package:my_restau/screens/cart_item.dart';
-import 'package:my_restau/screens/my_restaurant_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
+import 'package:my_restau/screens/nav_screen/search_screen.dart';
 import 'package:my_restau/widgets/custom_button_widget.dart';
 
 class Cart extends StatefulWidget {
@@ -58,14 +58,16 @@ class _CartState extends State<Cart> {
             height: 50,
           ),
           CustomButtonWidget(
-              text: 'Food Menu',
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (ctx) => const MyRestaurant(),
-                  ),
-                );
-              })
+            text: 'Food Menu',
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      SearchScreen(listItem: widget.listOfItem),
+                ),
+              );
+            },
+          )
         ],
       ),
     );

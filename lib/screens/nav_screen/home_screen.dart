@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_restau/widgets/custom_text_field.dart';
 import 'package:my_restau/widgets/location_widget.dart';
+import 'package:my_restau/data/dummy_data.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,9 +16,18 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentPageIndex = 0;
 
   final List<Widget> _pages = [
-    Image.asset('asset/images/banner.jpg'),
-    Image.asset('asset/images/banner2.jpg'),
-    Image.asset('asset/images/banner3.jpg'),
+    Image.asset(
+      'asset/images/steak.jpg',
+      fit: BoxFit.fill,
+    ),
+    Image.asset(
+      'asset/images/shrimp.jpg',
+      fit: BoxFit.fill,
+    ),
+    Image.asset(
+      'asset/images/banner3.jpg',
+      fit: BoxFit.fill,
+    ),
   ];
 
   @override
@@ -44,8 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 11),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const LocationWidget(),
             const SizedBox(
@@ -65,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 SizedBox(
                   height: 140,
+                  width: double.infinity,
                   child: PageView.builder(
                     itemCount: _pages.length,
                     controller: _pageController,
@@ -98,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             _pageController.animateToPage(
                               index,
-                              duration: const Duration(microseconds: 600),
+                              duration: const Duration(milliseconds: 300),
                               curve: Curves.easeOut,
                             );
                           },
@@ -114,6 +126,74 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ],
+            ),
+            const Divider(
+              color: Colors.grey,
+              thickness: 0.5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const Text(
+                  'Categories',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'categoriesScreen');
+                  },
+                  child: const Text(
+                    'See All ',
+                    style: TextStyle(
+                      color: Color(0xFFD14D72),
+                      fontSize: 13,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: categoryItems.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(right: 20),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFD14D72).withOpacity(0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.asset(
+                          categoryItems[index]['images'] as String,
+                          width: 28,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 18),
+                        child: Text(
+                          categoryItems[index]['name'] as String,
+                          style: const TextStyle(fontSize: 13),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ],
         ),

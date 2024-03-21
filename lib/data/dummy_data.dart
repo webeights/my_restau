@@ -2,6 +2,33 @@ import 'package:my_restau/models/menu_item.dart';
 
 List<MenuItem> menu = [];
 
+final List<Map<String, String>> categoryItems = [
+  {
+    'name': 'Soup',
+    'images': 'asset/icon/soup.png',
+  },
+  {
+    'name': 'Cake',
+    'images': 'asset/icon/cake.png',
+  },
+  {
+    'name': 'Drinks',
+    'images': 'asset/icon/cocktail.png',
+  },
+  {
+    'name': 'Salad',
+    'images': 'asset/icon/salad.png',
+  },
+  {
+    'name': 'Beef',
+    'images': 'asset/icon/beef.png',
+  },
+  {
+    'name': 'Coffee',
+    'images': 'asset/icon/cofee.png',
+  },
+];
+
 const List<MenuItem> menuItemList = [
   MenuItem(
     title: 'Barbeque Chicken',

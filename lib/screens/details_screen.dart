@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_restau/models/menu_item.dart';
-import 'package:my_restau/screens/cart_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:my_restau/screens/nav_screen/cart.dart';
 import 'package:my_restau/widgets/food_details.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -70,7 +70,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   int itemCount = 1;
 
-  void addMenuItem() {
+  addMenuItem() {
     setState(() {
       itemCount++;
     });
@@ -89,7 +89,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   void addToCartItem() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => CartScreen(
+        builder: (context) => Cart(
           listOfItem: _menuItem,
         ),
       ),
@@ -248,9 +248,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

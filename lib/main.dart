@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_restau/screens/categories_screend.dart';
 import 'package:my_restau/screens/my_restaurant_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:my_restau/screens/register_screen.dart';
@@ -47,6 +48,7 @@ class App extends StatelessWidget {
         'registerScreen': (context) => const RegisterScreen(),
         'registerSuccess': (context) => const RegisterSuccess(),
         'homeScreen': (context) => const MyRestaurant(),
+        'categoriesScreen': (context) => CategoriesScreen(),
       },
     );
   }
