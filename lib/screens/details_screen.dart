@@ -102,12 +102,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          color: const Color(0xFFD14D72),
-          iconSize: 20,
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.keyboard_arrow_left),
         ),
         actions: [
           IconButton(

@@ -102,6 +102,12 @@ class _CartState extends State<Cart> {
           text: 'My Cart',
           fontSize: 18,
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.keyboard_arrow_left),
+        ),
         centerTitle: true,
         actions: [
           IconButton(

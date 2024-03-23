@@ -29,6 +29,49 @@ final List<Map<String, String>> categoryItems = [
   },
 ];
 
+const List<MenuItem> favoriteFood = [
+  MenuItem(
+    title: 'Beef Steaw',
+    images: 'asset/menu/beef_steaw.png',
+    amount: 20,
+    ratings: 4.5,
+    cookingTime: '10-15',
+    description: 'Lorem ipsum dolor sit amet,consect\nadipiscing elit, sed do.',
+  ),
+  MenuItem(
+    title: 'Chicken Nuggets',
+    images: 'asset/menu/chicken_nuggets.png',
+    amount: 20,
+    ratings: 4.5,
+    cookingTime: '5-10 mins',
+    description: 'Lorem ipsum dolor sit amet,consect\nadipiscing elit, sed do.',
+  ),
+  MenuItem(
+    title: 'Chicken fries & Burger',
+    images: 'asset/menu/chicken_fries_burger.png',
+    amount: 20,
+    ratings: 4.5,
+    cookingTime: '10-13 mins',
+    description: 'Lorem ipsum dolor sit amet,consect\nadipiscing elit, sed do.',
+  ),
+  MenuItem(
+    title: 'Shrimp dried tempura',
+    images: 'asset/menu/dried_shrimp.png',
+    amount: 20,
+    ratings: 4.5,
+    cookingTime: '3-6 mins',
+    description: 'Lorem ipsum dolor sit amet,consect\nadipiscing elit, sed do.',
+  ),
+  MenuItem(
+    title: 'Fried Chicken',
+    images: 'asset/menu/fried_chicken.png',
+    amount: 20,
+    ratings: 4.5,
+    cookingTime: '15-20 mins',
+    description: 'Lorem ipsum dolor sit amet,consect\nadipiscing elit, sed do.',
+  ),
+];
+
 const List<MenuItem> menuItemList = [
   MenuItem(
     title: 'Barbeque Chicken',
