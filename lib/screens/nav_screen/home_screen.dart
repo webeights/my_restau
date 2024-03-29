@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_restau/models/menu_item.dart';
+import 'package:my_restau/screens/cart_screen.dart';
 import 'package:my_restau/widgets/custom_text_field.dart';
 import 'package:my_restau/widgets/location_widget.dart';
 import 'package:my_restau/data/dummy_data.dart';
@@ -21,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   favoriteButton(int index) {
     setState(() {
       topRatedMenusButton[index] = !topRatedMenusButton[index];
+
+      topReatedMenu.add(favoriteFood[index]);
     });
 
     return;
@@ -55,17 +59,27 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {},
-              icon: const Icon(
-                Icons.settings,
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Cart(
+                      listOfItem: menu,
+                    ),
+                  ),
+                );
+              },
+              icon: Image.asset(
+                'asset/icon/cart-shopping-fast.png',
+                color: const Color(0xFFD14D72),
+                height: 20,
+                width: 20,
               ),
-            )
+            ),
           ],
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 11),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 5,
               ),
               CustomTextField(
+                contentPadding: const EdgeInsetsDirectional.only(start: 10),
                 textEditingController: searchEditingController,
                 keyboardType: TextInputType.name,
                 hintText: 'Search',
@@ -116,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: List<Widget>.generate(_pages.length, (index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 5,
+                            horizontal: 3,
                           ),
                           child: InkWell(
                             onTap: () {
@@ -127,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                             child: CircleAvatar(
-                              radius: 4,
+                              radius: 3.5,
                               backgroundColor: currentPageIndex == index
                                   ? Colors.pink
                                   : Colors.grey,
@@ -243,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             Row(
-                              children: [
+                              children: <Widget>[
                                 const Icon(
                                   Icons.star,
                                   size: 15,

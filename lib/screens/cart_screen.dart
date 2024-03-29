@@ -62,8 +62,9 @@ class _CartState extends State<Cart> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) =>
-                      SearchScreen(listItem: widget.listOfItem),
+                  builder: (context) => SearchScreen(
+                    listItem: widget.listOfItem,
+                  ),
                 ),
               );
             },

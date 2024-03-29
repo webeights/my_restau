@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_restau/screens/categories_screen.dart';
 import 'package:my_restau/screens/my_restaurant_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:my_restau/screens/register_screen.dart';
 import 'package:my_restau/screens/register_success.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
-    overlays: <SystemUiOverlay>[],
-  );
-
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setEnabledSystemUIMode(
+  //   SystemUiMode.manual,
+  //   overlays: <SystemUiOverlay>[],
+  // );
   runApp(const App());
 }
 

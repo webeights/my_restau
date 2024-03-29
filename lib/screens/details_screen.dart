@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_restau/models/menu_item.dart';
+import 'package:my_restau/screens/cart_screen.dart';
 import 'package:my_restau/screens/login_screen.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:my_restau/screens/nav_screen/cart.dart';
 import 'package:my_restau/widgets/food_details.dart';
 
 class DetailsScreen extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'package:my_restau/models/menu_item.dart';
 
 List<MenuItem> menu = [];
+List<MenuItem> topReatedMenu = [];
 
 final List<Map<String, String>> categoryItems = [
   {
@@ -52,22 +53,6 @@ const List<MenuItem> favoriteFood = [
     amount: 20,
     ratings: 4.5,
     cookingTime: '10-13 mins',
-    description: 'Lorem ipsum dolor sit amet,consect\nadipiscing elit, sed do.',
-  ),
-  MenuItem(
-    title: 'Shrimp dried tempura',
-    images: 'asset/menu/dried_shrimp.png',
-    amount: 20,
-    ratings: 4.5,
-    cookingTime: '3-6 mins',
-    description: 'Lorem ipsum dolor sit amet,consect\nadipiscing elit, sed do.',
-  ),
-  MenuItem(
-    title: 'Fried Chicken',
-    images: 'asset/menu/fried_chicken.png',
-    amount: 20,
-    ratings: 4.5,
-    cookingTime: '15-20 mins',
     description: 'Lorem ipsum dolor sit amet,consect\nadipiscing elit, sed do.',
   ),
 ];

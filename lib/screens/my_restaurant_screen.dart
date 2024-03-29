@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_restau/data/dummy_data.dart';
-import 'package:my_restau/screens/nav_screen/cart.dart';
+import 'package:my_restau/models/menu_item.dart';
+
 import 'package:my_restau/screens/nav_screen/favorite_screen.dart';
 import 'package:my_restau/screens/nav_screen/home_screen.dart';
 import 'package:my_restau/screens/nav_screen/profile_screen.dart';
@@ -21,10 +22,7 @@ class _MyRestaurantState extends State<MyRestaurant> {
     SearchScreen(
       listItem: menu,
     ),
-    Cart(
-      listOfItem: menu,
-    ),
-    const FavoriteScreen(),
+    FavoriteScreen(),
     const ProfileScreen(),
   ];
 
@@ -52,10 +50,6 @@ class _MyRestaurantState extends State<MyRestaurant> {
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
