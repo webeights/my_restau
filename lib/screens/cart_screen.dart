@@ -21,6 +21,7 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   int currentIndexItem = 0;
 
+  // Remove Item in Cart
   void removeItem(MenuItem menuItem) {
     setState(() {
       menu.remove(menuItem);
@@ -29,6 +30,8 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
+    // Check if the item was added.
+    // If empty display a text.
     Widget cartIsEmpty = Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -120,8 +123,10 @@ class _CartState extends State<Cart> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            cartIsEmpty,
+          children: <Widget>[
+            Expanded(
+              child: cartIsEmpty,
+            ),
           ],
         ),
       ),

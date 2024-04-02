@@ -14,9 +14,27 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   void removeFavoriteItem(MenuItem item) {
+    final indexOfItem = topReatedMenu.indexOf(item);
+
     setState(() {
       topReatedMenu.remove(item);
     });
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 4),
+        content: const Text('Favorite item was deleted'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              topReatedMenu.insert(indexOfItem, item);
+            });
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -32,11 +50,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     );
 
     if (topReatedMenu.isNotEmpty) {
-      menuIsEmpty = Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            Expanded(
+      menuIsEmpty = Column(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
                 itemCount: topReatedMenu.length,
                 itemBuilder: (context, index) {
@@ -52,8 +70,28 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 },
               ),
             ),
-          ],
-        ),
+          ),
+          Container(
+            height: 250,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25),
+                topRight: Radius.circular(25),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Total Price'),
+                ],
+              ),
+            ),
+          ),
+        ],
       );
     }
 
@@ -89,6 +127,7 @@ class FavoriteItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      semanticContainer: true,
       child: ListTile(
         leading: Image.asset(
           cartItem.images,
@@ -135,23 +174,6 @@ class FavoriteItemCard extends StatelessWidget {
                     color: const Color(0xFFD14D72),
                   ),
                 ),
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD14D72),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Text(
-                      'Add To Cart',
-                      style: GoogleFonts.poppins(
-                        fontSize: 11,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
           ],

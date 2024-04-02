@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_restau/models/menu_item.dart';
 import 'package:my_restau/screens/cart_screen.dart';
 import 'package:my_restau/widgets/custom_text_field.dart';
 import 'package:my_restau/widgets/location_widget.dart';
@@ -26,6 +25,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
       topReatedMenu.add(favoriteFood[index]);
     });
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 2),
+        content: Text('${favoriteFood[index].title} was added in favorite'),
+        action: SnackBarAction(
+          label: 'Done',
+          onPressed: () {},
+        ),
+      ),
+    );
 
     return;
   }
